@@ -1,0 +1,41 @@
+import java.util.*;
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+        Scanner sc = new Scanner(System.in);
+       int T=sc.nextInt();
+       while(T-->0){
+           int N=sc.nextInt();
+           long res=0;
+           int arr[]=new int[N];
+           int count=0;
+           for(int i=0;i<N;i++){
+               arr[i]=sc.nextInt();
+           }
+           long K=sc.nextLong();
+           for(int j=1;j<(1<<N);j++){
+               int state=-1;
+               int temp=1;
+               for(int k=0;k<N;k++){
+                   if((j&(1<<k))!=0){
+                   temp=lcm(temp,arr[k]);
+                   state*=-1;
+               }
+           }
+           if(state==1)
+           res+=K/temp;
+           else
+           res-=K/temp;
+           }
+           System.out.println(res);
+       }
+    }
+           static int gcd(int a,int b){
+               if(b==0)
+               return a;
+               else
+               return gcd(b,a%b);
+           }
+           static int lcm(int a,int b){
+               return (a*b)/gcd(a,b);
+           }
+}
